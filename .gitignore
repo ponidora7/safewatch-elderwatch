@@ -1,0 +1,120 @@
+# ==========================================
+# 1. Dataset & File Mentah (Jangan commit file besar)
+# ==========================================
+# Abaikan semua isi folder raw, kecuali file .gitkeep
+data/raw/*
+!data/raw/.gitkeep
+
+# Abaikan semua isi folder processed, kecuali file .gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Filter cadangan untuk ekstensi data besar di manapun lokasinya
+*.csv
+*.parquet
+*.pkl
+*.json
+*.sqlite3
+
+# ==========================================
+# 2. Model AI & Machine Learning Artifacts
+# ==========================================
+# Jangan commit otak AI yang ukurannya puluhan/ratusan MB
+*.h5
+*.keras
+*.pb
+*.tflite
+*.onnx
+*.pt
+*.pth
+checkpoint_safewatch.keras
+
+# Cache dan Logs dari Ultralytics (YOLO) & TensorBoard
+runs/
+yolov8n.pt
+*.cache
+logs/
+tensorboard/
+
+# ==========================================
+# 3. Environment Variables (Sangat Kritis)
+# ==========================================
+# Jangan biarkan Token Telegram atau Kunci API-mu bocor ke GitHub!
+.env
+.env.local
+.env.development
+*.key
+*.pem
+
+# ==========================================
+# 4. Virtual Environments
+# ==========================================
+venv/
+ENV/
+env/
+.venv/
+env.bak/
+venv.bak/
+
+# ==========================================
+# 5. Jupyter Checkpoints
+# ==========================================
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# ==========================================
+# 6. Python Cache & Build Artifacts
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+
+# ==========================================
+# 7. IDE & Editor
+# ==========================================
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ==========================================
+# 8. OS System Files
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ==========================================
+# 9. Streamlit
+# ==========================================
+.streamlit/
+*.webm
+
+# ==========================================
+# 10. Reports (Abaikan gambar hasil generate)
+# ==========================================
+reports/figures/*
+!reports/figures/.gitkeep
