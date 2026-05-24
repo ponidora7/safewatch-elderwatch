@@ -36,6 +36,10 @@ yolov8n.pt
 logs/
 tensorboard/
 
+# ✅ EXCEPTION: Izinkan model SafeWatch yang diperlukan untuk runtime
+!models/fire_smoke.pt
+!models/safewatch_fall_model.keras
+!models/yolov8n.pt
 # ==========================================
 # 3. Environment Variables (Sangat Kritis)
 # ==========================================
