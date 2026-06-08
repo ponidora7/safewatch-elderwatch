@@ -1,11 +1,11 @@
-# src/feature_temporal.py
 import numpy as np
+import pandas as pd
 from collections import deque
 
 class TemporalFeatureExtractor:
     """
     Extract temporal features menggunakan sliding window
-    Reference: PoseAware FallNet [[12]] - temporal window analysis
+    Reference: PoseAware FallNet [12] - temporal window analysis
     """
     def __init__(self, window_size=5, step_size=1):
         self.window_size = window_size
@@ -39,13 +39,13 @@ class TemporalFeatureExtractor:
             # Concatenate all
             combined = np.concatenate([static, velocity, acceleration, torso_angles])
             features.append(combined)
-        
+            
         return np.array(features)
     
     def _compute_torso_angles(self, window):
         """
         Hitung angle antara torso dan vertical axis
-        Critical untuk deteksi fall state [[18]]
+        Critical untuk deteksi fall state [18]
         """
         angles = []
         for frame in window:
@@ -64,5 +64,53 @@ class TemporalFeatureExtractor:
             angle = np.arccos(np.dot(torso_vector, vertical) / 
                             (np.linalg.norm(torso_vector) * np.linalg.norm(vertical)))
             angles.append(np.degrees(angle))
-        
+            
         return np.array([np.mean(angles), np.std(angles)])  # 2 features
+
+
+# --- FITUR TAMBAHAN GEOMETRI POSTUR UNTUK DATAFRAME ---
+
+def add_geometric_posture_features(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Menambahkan fitur informatif berbasis Bounding Box (BBox) ke dalam DataFrame.
+    Sangat berguna untuk dipanggil di Notebook saat preprocessing data YOLO/tabular.
+    """
+    # Pastikan membuat salinan agar tidak mengubah dataframe asli secara tidak sengaja (SettingWithCopyWarning)
+    df = df.copy()
+    
+    if "bbox_y_center" in df.columns:
+        df["center_y_ratio"] = df["bbox_y_center"]  # posisi vertikal: tinggi = berdiri
+        
+    if "aspect_ratio" in df.columns:
+        df["is_horizontal"] = df["aspect_ratio"] > 1.2  # bbox lebih lebar dari tinggi
+        # Fitur untuk model: aspect_ratio < 0.8 -> cenderung horizontal -> mirip jatuh
+        df["posture_score"] = np.where(df["aspect_ratio"] < 0.8, 1, 0)
+        
+    if "bbox_area_norm" in df.columns:
+        df["bbox_size_category"] = pd.cut(
+            df["bbox_area_norm"],
+            bins=[0, 0.05, 0.2, 1.0],
+            labels=["small", "medium", "large"]
+        )
+        
+    return df
+
+# Blok ini akan memudahkan Anda jika ingin menguji atau menjalankan script secara langsung
+if __name__ == "__main__":
+    import os
+    
+    # Contoh implementasi/testing pipeline data tabular
+    input_path = "data/processed/fall_features.csv"
+    output_path = "data/processed/cleaned_fall_features.csv"
+    
+    if os.path.exists(input_path):
+        print(f"Membaca dataset dari {input_path}...")
+        df_raw = pd.read_csv(input_path)
+        
+        print("Menambahkan fitur geometri postur...")
+        df_processed = add_geometric_posture_features(df_raw)
+        
+        df_processed.to_csv(output_path, index=False)
+        print(f"Dataset berhasil disimpan ke {output_path}")
+    else:
+        print(f"File {input_path} belum tersedia untuk diuji.")

@@ -1,49 +1,10 @@
 # ==========================================
-# 1. Dataset & File Mentah (Jangan commit file besar)
+# 1. Virtual Environments & Secret Keys
 # ==========================================
-# Abaikan semua isi folder raw, kecuali file .gitkeep
-data/raw/*
-!data/raw/.gitkeep
-
-# Abaikan semua isi folder processed, kecuali file .gitkeep
-data/processed/*
-!data/processed/.gitkeep
-
-# Filter cadangan untuk ekstensi data besar di manapun lokasinya
-*.csv
-*.parquet
-*.pkl
-*.json
-*.sqlite3
-
-# ==========================================
-# 2. Model AI & Machine Learning Artifacts
-# ==========================================
-# Jangan commit otak AI yang ukurannya puluhan/ratusan MB
-*.h5
-*.keras
-*.pb
-*.tflite
-*.onnx
-*.pt
-*.pth
-checkpoint_safewatch.keras
-
-# Cache dan Logs dari Ultralytics (YOLO) & TensorBoard
-runs/
-yolov8n.pt
-*.cache
-logs/
-tensorboard/
-
-# ✅ EXCEPTION: Izinkan model SafeWatch yang diperlukan untuk runtime
-!models/fire_smoke.pt
-!models/safewatch_fall_model.keras
-!models/yolov8n.pt
-# ==========================================
-# 3. Environment Variables (Sangat Kritis)
-# ==========================================
-# Jangan biarkan Token Telegram atau Kunci API-mu bocor ke GitHub!
+.venv/
+venv/
+ENV/
+env/
 .env
 .env.local
 .env.development
@@ -51,23 +12,52 @@ tensorboard/
 *.pem
 
 # ==========================================
-# 4. Virtual Environments
+# 2. Dataset & Raw Files (Large Binary)
 # ==========================================
-venv/
-ENV/
-env/
-.venv/
-env.bak/
-venv.bak/
+# Abaikan gambar & label raw, TAPI pertahankan metadata penting
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/**/data.yaml
+!data/raw/**/README.*.txt
+
+# Abaikan file hasil processing yang bisa di-generate ulang
+data/processed/*
+!data/processed/.gitkeep
+
+# Scope hanya ke folder data agar tidak mengabaikan config kecil di root
+data/**/*.csv
+data/**/*.parquet
+data/**/*.pkl
+data/**/*.sqlite3
 
 # ==========================================
-# 5. Jupyter Checkpoints
+# 3. Machine Learning Models & Artifacts
 # ==========================================
-.ipynb_checkpoints/
-*/.ipynb_checkpoints/
+# Abaikan semua weight/checkpoint by default
+*.pt
+*.pth
+*.h5
+*.keras
+*.pb
+*.tflite
+*.onnx
+*.safetensors
+checkpoint_*.keras
+
+# Cache & Logs training (Ultralytics/TensorBoard)
+runs/
+*.cache
+logs/
+tensorboard/
+yolov8n.pt
+
+# ✅ EXCEPTION: Simpan model inti yang wajib ada di repo
+!models/fire_smoke.pt
+!models/safewatch_fall_model.keras
+!models/yolov8n.pt
 
 # ==========================================
-# 6. Python Cache & Build Artifacts
+# 4. Python Cache & Build Artifacts
 # ==========================================
 __pycache__/
 *.py[cod]
@@ -91,18 +81,21 @@ wheels/
 *.egg
 .pytest_cache/
 .coverage
+coverage.xml
 
 # ==========================================
-# 7. IDE & Editor
+# 5. Jupyter & Notebook Checkpoints
+# ==========================================
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# ==========================================
+# 6. IDE, Editor & OS Files
 # ==========================================
 .idea/
-.vscode/
+# .vscode/  <-- Uncomment baris ini jika TIDAK ingin commit settings/launch.json VS Code
 *.swp
 *.swo
-
-# ==========================================
-# 8. OS System Files
-# ==========================================
 .DS_Store
 .DS_Store?
 ._*
@@ -112,13 +105,16 @@ ehthumbs.db
 Thumbs.db
 
 # ==========================================
-# 9. Streamlit
+# 7. Streamlit & Dashboard Artifacts
 # ==========================================
 .streamlit/
 *.webm
+*.mp4
 
 # ==========================================
-# 10. Reports (Abaikan gambar hasil generate)
+# 8. Reports & Generated Figures
 # ==========================================
 reports/figures/*
 !reports/figures/.gitkeep
+reports/*.html
+reports/*.pdf

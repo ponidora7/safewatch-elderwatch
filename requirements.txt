@@ -4,9 +4,9 @@
 opencv-python==4.11.0.86
 opencv-contrib-python==4.11.0.86
 opencv-python-headless>=4.8.0
-mediapipe==0.10.5
+mediapipe==0.10.35
 ultralytics
-pillow==10.2.0
+pillow>=11.0.0
 
 # ==========================================
 # 2. Deep Learning & Machine Learning

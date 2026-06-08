@@ -11,7 +11,7 @@ REQUIRED_PACKAGES = {
     'tensorflow': ('tensorflow', '2.15.0'),
     'keras': ('keras', '2.15.0'),
     'opencv-python': ('cv2', '4.11.0.86'),
-    'mediapipe': ('mediapipe', '0.10.5'),
+    'mediapipe': ('mediapipe', '0.10.35'),
     'ultralytics': ('ultralytics', None),  # Version flexible
     'pandas': ('pandas', '2.1.4'),
     'numpy': ('numpy', '1.26.4'),
