@@ -1,0 +1,140 @@
+# ==========================================
+# 1. Virtual Environments & Secret Keys
+# ==========================================
+.venv/
+venv/
+ENV/
+env/
+.env
+.env.local
+.env.development
+*.key
+*.pem
+
+# ==========================================
+# 2. Dataset & Raw Files (Large Binary)
+# ==========================================
+# Abaikan gambar & label raw, TAPI pertahankan metadata penting
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/**/data.yaml
+!data/raw/**/README.*.txt
+
+# Abaikan file hasil processing yang bisa di-generate ulang
+data/processed/*
+!data/processed/.gitkeep
+!data/processed/*.csv
+
+# Scope hanya ke folder data agar tidak mengabaikan config kecil di root
+data/**/*.csv
+!data/processed/*.csv
+data/**/*.parquet
+data/**/*.pkl
+data/**/*.sqlite3
+
+# ==========================================
+# 3. Machine Learning Models & Artifacts
+# ==========================================
+# Abaikan semua weight/checkpoint by default
+*.pt
+*.pth
+*.h5
+*.keras
+*.pb
+*.tflite
+*.onnx
+*.safetensors
+checkpoint_*.keras
+
+# Cache & Logs training (Ultralytics/TensorBoard)
+runs/
+*.cache
+logs/
+tensorboard/
+yolov8n.pt
+
+# ✅ EXCEPTION: Simpan model inti yang wajib ada di repo
+!models/fire_smoke.pt
+!models/safewatch_fall_model.keras
+!models/yolov8n.pt
+
+# ==========================================
+# 4. Python Cache & Build Artifacts
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+!frontend/src/lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+coverage.xml
+
+# ==========================================
+# 5. Jupyter & Notebook Checkpoints
+# ==========================================
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# ==========================================
+# 6. IDE, Editor & OS Files
+# ==========================================
+.idea/
+# .vscode/  <-- Uncomment baris ini jika TIDAK ingin commit settings/launch.json VS Code
+*.swp
+*.swo
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ==========================================
+# 7. Streamlit & Dashboard Artifacts
+# ==========================================
+.streamlit/
+*.webm
+*.mp4
+
+# ==========================================
+# 8. Reports & Generated Figures
+# ==========================================
+reports/figures/*
+!reports/figures/.gitkeep
+reports/*.html
+reports/*.pdf
+
+# ==========================================
+# 9. Node / Frontend Ignore Rules
+# ==========================================
+node_modules/
+.next/
+out/
+.pnpm-store/
+.pnpm-debug.log
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.eslintcache
+.stylelintcache
+.env.production
+.env.local
+.env.*.local

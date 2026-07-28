@@ -1,0 +1,6 @@
+{
+  "name": "Safewatch",
+  "description": "An intelligent elder care platform providing real-time fall detection, health insights, and seamless caregiver integration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,33 @@
+# Ignore raw image data, videos, and labels to save AI context window
+data/raw/**/*.jpg
+data/raw/**/*.png
+data/raw/**/*.txt
+data/real_footage/*.jpg
+data/real_footage/*.mp4
+
+# Ignore large binary models
+models/*.pt
+models/*.keras
+models/*.h5
+
+# Ignore generated documentation figures / rich media
+reports/figures/*
+
+# Ignore virtual env files
+.venv/
+venv/
+env/
+
+# Ignore pycache
+__pycache__/
+*.pyc
+
+# Ignore run caches
+runs/
+.cache/
+.pytest_cache/
+
+# Ignore legacy codebase (Streamlit dashboard + old ML scripts)
+# These files reference old architecture (MediaPipe, 57 features, old paths)
+# and should not be used as AI context for the current production pipeline.
+legacy/

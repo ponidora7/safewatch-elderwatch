@@ -1,0 +1,15 @@
+# ==========================================
+# Legacy ML Training & MediaPipe Dependencies
+# ==========================================
+# These dependencies require Python >=3.7, <=3.11.
+# They are only needed for legacy model training, and are not required
+# to run the FastAPI backend + Next.js web application.
+
+tensorflow==2.15.0
+tensorflow-estimator==2.15.0
+tensorflow-intel==2.15.0
+tensorflow-io-gcs-filesystem==0.31.0
+tensorboard==2.15.2
+tensorboard-data-server==0.7.2
+keras==2.15.0
+mediapipe==0.10.35

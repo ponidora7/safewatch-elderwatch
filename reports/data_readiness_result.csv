@@ -1,0 +1,9 @@
+dataset,class_name,count,pct_of_dataset,total_clean,total_raw,data_retained_pct
+fall,Sleeping,4471,34.0,13151,13158,99.95
+fall,Standing,3284,24.97,13151,13158,99.95
+fall,Falling,2767,21.04,13151,13158,99.95
+fall,Sitting,2316,17.61,13151,13158,99.95
+fall,Bending,313,2.38,13151,13158,99.95
+fire_smoke,Fire,6329,53.55,11818,11818,100.0
+fire_smoke,Smoke,5489,46.45,11818,11818,100.0
+person,person,13298,100.0,13298,13340,99.69

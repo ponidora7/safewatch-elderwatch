@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+python-multipart
+supabase
+pydantic
+pydantic-settings
+requests
+python-dotenv
+resend
+onnxruntime
+ultralytics
+scikit-learn==1.3.2
+opencv-python-headless
